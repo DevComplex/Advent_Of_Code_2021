@@ -216,8 +216,23 @@ func (solution AdventOfCodeDay3Solution) Part1() int {
 	return ventMap.OverlappingVents()
 }
 
+func (solution AdventOfCodeDay3Solution) Part2() int {
+	data := solution.Data()
+	rows := 0
+	cols := 0
+
+	for _, line := range data {
+		rows = max(rows, line.MaxY())
+		cols = max(cols, line.MaxX())
+	}
+
+	ventMap := NewHydrothermalVentMap(data, rows, cols)
+	return ventMap.OverlappingVents()
+}
+
 func main() {
 	fileDataSource := AdventOfCodeFileDataSourceDay3{"test_data2"}
 	solution := AdventOfCodeDay3Solution{fileDataSource, nil}
 	fmt.Println(solution.Part1())
+	fmt.Println(solution.Part2())
 }
